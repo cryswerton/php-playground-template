@@ -1,0 +1,125 @@
+<?php
+
+require_once __DIR__ . '/../models/Link.php';
+
+class Controller {
+    private $pdo;
+
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function index() 
+    {
+        $link = new Link($this->pdo);
+        $links = $link->getAll();
+        
+        view('index', ['links' => $links]);
+    }
+
+    public function add()
+    {
+        view('add');
+    }
+
+    public function create()
+    {
+        // check the POST url from the request
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['url'])) {
+        $url = $_POST['url'];
+        // validate the URL
+        if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+            echo "Invalid URL.";
+            exit;
+        }
+        
+        $link = new Link($this->pdo);;
+
+        // execute the statement
+        if ($link->create($url)) {
+            $links = $link->getAll();
+            view('index', ['links' => $links]);
+            exit;
+        } else {
+            echo "Failed to create link.";
+        }
+        } else {
+            echo "Invalid request.";
+            exit;
+        }   
+    }
+
+    public function update()
+    {
+        // check if the request is a POST request
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id']) && isset($_POST['url'])) {
+            $linkId = $_POST['id'];
+            $url = $_POST['url'];
+
+            // validate the URL
+            if (filter_var($url, FILTER_VALIDATE_URL) === false) {
+                echo "Invalid URL.";
+                exit;
+            }
+
+            $link = new Link($this->pdo);;
+
+            // execute the statement
+            if ($link->update($linkId, $url)) {
+                echo "Link updated successfully.<br>";
+                // redirect to the index page after successful update
+                echo '<a href="index.php">Go back to links</a>';
+                exit;
+            } else {
+                echo "Failed to update link.";
+            }
+        } else {
+            echo "Invalid request.";
+            exit;
+        }
+    }
+
+    public function edit() 
+    {
+        if (!isset($_GET['id'])) {
+            echo "No link ID provided.";
+            exit;
+        }
+
+        // get the link ID from the query parameters
+        $linkId = $_GET['id'];
+
+        $link = new Link($this->pdo);
+        $editedLink = $link->getById($linkId);
+
+        if (!$editedLink) {
+            echo "Link not found.";
+            exit;
+        }    
+
+        view('edit', ['link' => $editedLink]);
+    }
+
+    function delete()
+    {
+        if (!isset($_GET['id'])) {
+            echo "No link ID provided.";
+            exit;
+        }
+
+        // get the link ID from the query parameters
+        $linkId = $_GET['id'];
+
+        $link = new Link($this->pdo);
+
+        // execute the statement
+        if ($link->delete($linkId)) {
+            echo "Link deleted successfully.<br>";
+            // redirect to the index page after successful deletion
+            echo '<a href="index.php">Go back to links</a>';
+            exit;
+        } else {
+            echo "Failed to delete link.";
+        }
+    }
+}
