@@ -1,3 +1,3 @@
 <?php
 
-echo "Hello, World! This is the index.php file in the src/public directory.";
+require_once __DIR__ . '/../private/database.php';
