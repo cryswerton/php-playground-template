@@ -12,6 +12,6 @@
         <input type="text" id="url" name="url" value="https://" required>
         <button type="submit">Create</button>
     </form>
-    <p><a href="index.php">Back to links</a></p>
+    <p><a href="/">Back to links</a></p>
 </body>
 </html>

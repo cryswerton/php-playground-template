@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Links</h1>
-    <p><a href="index.php?action=add">Add New Link</a></p>
+    <p><a href="/add">Add New Link</a></p>
     <?php foreach ($links as $link): ?>
         <a href="<?php echo 'index.php?action=edit&id=' . $link['id']; ?>">
             <?php echo htmlspecialchars($link['url']); ?>
