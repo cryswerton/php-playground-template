@@ -116,7 +116,7 @@ class Controller {
         if ($link->delete($linkId)) {
             echo "Link deleted successfully.<br>";
             // redirect to the index page after successful deletion
-            echo '<a href="index.php">Go back to links</a>';
+            echo '<a href="/">Go back to links</a>';
             exit;
         } else {
             echo "Failed to delete link.";
