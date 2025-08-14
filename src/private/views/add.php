@@ -6,7 +6,7 @@
     <title>Create Link</title>
 </head>
 <body>
-    <form action="index.php?action=create" method="post">
+    <form action="/create" method="post">
         <h1>Create Link</h1>
         <label for="url">URL:</label>
         <input type="text" id="url" name="url" value="https://" required>
