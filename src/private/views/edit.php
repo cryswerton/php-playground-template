@@ -16,6 +16,6 @@
 
     <p><a href="index.php?action=delete&id=<?php echo $link['id']; ?>">Delete this link</a></p>
     
-    <p><a href="index.php">Back to links</a></p>
+    <p><a href="/">Back to links</a></p>
 </body>
 </html>
