@@ -15,8 +15,6 @@ $routes = [
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-var_dump($uri);
-
 $controller = new Controller($pdo);
 
 if(array_key_exists($uri, $routes)) {
