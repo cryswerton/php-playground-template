@@ -6,7 +6,7 @@
     <title>Edit Link</title>
 </head>
 <body>
-    <form action="index.php?action=update" method="post">
+    <form action="/update" method="post">
         <h1>Edit Link</h1>
         <label for="url">URL:</label>
         <input type="text" id="url" name="url" value="<?php echo htmlspecialchars($link['url']); ?>" required>

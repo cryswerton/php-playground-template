@@ -68,7 +68,7 @@ class Controller {
             if ($link->update($linkId, $url)) {
                 echo "Link updated successfully.<br>";
                 // redirect to the index page after successful update
-                echo '<a href="index.php">Go back to links</a>';
+                echo '<a href="/">Go back to links</a>';
                 exit;
             } else {
                 echo "Failed to update link.";
