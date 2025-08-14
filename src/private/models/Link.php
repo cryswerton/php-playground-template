@@ -2,13 +2,14 @@
 
 class Link {
     private $pdo;
+    private $table = 'links';
 
     public function __construct($pdo) {
         $this->pdo = $pdo;
     }
 
     public function create($url) {
-        $stmt = $this->pdo->prepare("INSERT INTO links (url) VALUES (:url)");
+        $stmt = $this->pdo->prepare("INSERT INTO {$this->table} (url) VALUES (:url)");
         $stmt->bindParam(':url', $url);
         return $stmt->execute();
     }
