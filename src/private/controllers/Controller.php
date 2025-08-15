@@ -43,7 +43,8 @@ class Controller {
 
         // execute the statement
         if ($link->create($url)) {
-            $this->renderHomePage();
+            header('Location: /');
+            exit;
         } else {
             echo "Failed to create link.";
         }
