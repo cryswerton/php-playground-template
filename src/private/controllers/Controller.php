@@ -9,12 +9,15 @@ class Controller {
         $this->pdo = $pdo;
     }
 
-    public function index() 
-    {
+    private function renderHomePage() {
         $link = new Link($this->pdo);
         $links = $link->getAll();
-        
         view('index', ['links' => $links]);
+    }   
+
+    public function index() 
+    {
+        $this->renderHomePage();
     }
 
     public function add()
@@ -32,14 +35,12 @@ class Controller {
             echo "Invalid URL.";
             exit;
         }
-        
-        $link = new Link($this->pdo);;
+
+        $link = new Link($this->pdo);
 
         // execute the statement
         if ($link->create($url)) {
-            $links = $link->getAll();
-            view('index', ['links' => $links]);
-            exit;
+            $this->renderHomePage();
         } else {
             echo "Failed to create link.";
         }
@@ -66,10 +67,7 @@ class Controller {
 
             // execute the statement
             if ($link->update($linkId, $url)) {
-                echo "Link updated successfully.<br>";
-                // redirect to the index page after successful update
-                echo '<a href="/">Go back to links</a>';
-                exit;
+                $this->renderHomePage();
             } else {
                 echo "Failed to update link.";
             }
@@ -111,10 +109,7 @@ class Controller {
 
         // execute the statement
         if ($link->delete($linkId)) {
-            echo "Link deleted successfully.<br>";
-            // redirect to the index page after successful deletion
-            echo '<a href="/">Go back to links</a>';
-            exit;
+            $this->renderHomePage();
         } else {
             echo "Failed to delete link.";
         }
