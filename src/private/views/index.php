@@ -9,7 +9,7 @@
     <h1>Links</h1>
     <p><a href="/add">Add New Link</a></p>
     <?php foreach ($links as $link): ?>
-        <a href="<?php echo '/edit?id=' . $link['id']; ?>">
+        <a href="<?php echo '/edit/' . $link['id']; ?>">
             <?php echo htmlspecialchars($link['url']); ?>
         </a><br>
     <?php endforeach; ?>

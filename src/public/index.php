@@ -17,10 +17,24 @@ $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $controller = new Controller($pdo);
 
-if(array_key_exists($uri, $routes)) {
+if(preg_match('#^/edit/(\d+)$#', $uri, $matches)){
+    var_dump($matches);
+}
+
+$parts = null;
+$id = null;
+if(isset($matches[1])) {
+    $id = $matches[1];
+    $uri = ltrim($uri, '/');
+    $parts = explode('/', $uri);
+    $uri = '/' . $parts[0];
+}
+
+if (array_key_exists($uri, $routes)) {
     $action = $routes[$uri];
-    if(method_exists($controller, $action)) {
-        $controller->$action();
+    if (method_exists($controller, $action)) {
+
+        $controller->$action($id);
     } else {
         http_response_code(404);
         echo "Action not found.";
@@ -31,6 +45,23 @@ if(array_key_exists($uri, $routes)) {
     echo "Page not found.";
     exit;
 }
+
+
+
+// if(array_key_exists($uri, $routes)) {
+//     $action = $routes[$uri];
+//     if(method_exists($controller, $action)) {
+//         $controller->$action();
+//     } else {
+//         http_response_code(404);
+//         echo "Action not found.";
+//         exit;
+//     }
+// } else {
+//     http_response_code(404);
+//     echo "Page not found.";
+//     exit;
+// }
 
 ?>
 

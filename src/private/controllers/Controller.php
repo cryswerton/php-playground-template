@@ -79,18 +79,15 @@ class Controller {
         }
     }
 
-    public function edit() 
+    public function edit($id) 
     {
-        if (!isset($_GET['id'])) {
+        if ($id === null) {
             echo "No link ID provided.";
             exit;
         }
 
-        // get the link ID from the query parameters
-        $linkId = $_GET['id'];
-
         $link = new Link($this->pdo);
-        $editedLink = $link->getById($linkId);
+        $editedLink = $link->getById($id);
 
         if (!$editedLink) {
             echo "Link not found.";
