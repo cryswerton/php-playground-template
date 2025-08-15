@@ -14,5 +14,8 @@
             <?php echo htmlspecialchars($link['url']); ?>
         </a><br>
     <?php endforeach; ?>
+    <?php if (isset($message)): ?>
+        <p><?php echo htmlspecialchars($message); ?></p>
+    <?php endif; ?>
 </body>
 </html>

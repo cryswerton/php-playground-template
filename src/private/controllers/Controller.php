@@ -9,10 +9,13 @@ class Controller {
         $this->pdo = $pdo;
     }
 
-    private function renderHomePage() {
+    private function renderHomePage($message = null) {
         $link = new Link($this->pdo);
         $links = $link->getAll();
-        view('index', ['links' => $links]);
+        view('index', [
+            'links' => $links,
+            'message' => $message
+        ]);
     }   
 
     public function index() 
@@ -32,8 +35,8 @@ class Controller {
         $url = $_POST['url'];
         // validate the URL
         if (filter_var($url, FILTER_VALIDATE_URL) === false) {
-            echo "Invalid URL.";
-            exit;
+            $this->renderHomePage('Invalid URL.');
+            return;
         }
 
         $link = new Link($this->pdo);
