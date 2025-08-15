@@ -1,0 +1,32 @@
+body{
+    background-color: #0E1117;
+    color: #9098A1;
+}
+
+a:link{
+    color: #9098A1;
+}
+
+a:visited{
+    color: #9098A1;
+}
+
+a:hover{
+    color: #FFFFFF;
+}
+
+input[type="text"]{
+    background-color: #1F232A;
+    color: #9098A1;
+    border: 1px solid #9098A1;
+    padding: 5px;
+    width: 200px;
+}
+
+button{
+    background-color: #3A3F47;
+    color: #FFFFFF;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
