@@ -71,7 +71,8 @@ class Controller {
 
             // execute the statement
             if ($link->update($linkId, $url)) {
-                $this->renderHomePage();
+                header('Location: /');
+                exit;
             } else {
                 echo "Failed to update link.";
             }
